@@ -293,7 +293,10 @@ function formatDate(date) {
   return `${year}-${month}-${day}`;
 }
 
-
+if(new URLSearchParams(location.search).get('key') ){
+    document.getElementById("api_key").value = new URLSearchParams(location.search).get('key');
+    checkOpenAICredit();
+}
     </script>
 </body>
 </html>
