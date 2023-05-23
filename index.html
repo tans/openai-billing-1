@@ -21,11 +21,7 @@
         }
     </style>
 <style>
-body {
-    background: url('https://images.unsplash.com/photo-1678957949479-b1e876bee3f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2060&q=80') no-repeat center center fixed;
-    background-size: cover;
-    background-color: #f5f5f5;
-}
+ 
 
 .content {
     width: 100%;
@@ -230,9 +226,9 @@ async function checkBilling(apiKey) {
   const endDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
   // 设置API请求URL和请求头
-  const urlSubscription = 'https://api.openai.com/v1/dashboard/billing/subscription'; // 查是否订阅
-  const urlBalance = 'https://api.openai.com/dashboard/billing/credit_grants'; // 查普通账单
-  urlUsage = `https://api.openai.com/v1/dashboard/billing/usage?start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}`; // 查使用量
+  const urlSubscription = '/v1/dashboard/billing/subscription'; // 查是否订阅
+  const urlBalance = '/dashboard/billing/credit_grants'; // 查普通账单
+  urlUsage = `/v1/dashboard/billing/usage?start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}`; // 查使用量
   const headers = {
     "Authorization": "Bearer " + apiKey,
     "Content-Type": "application/json"
@@ -267,7 +263,7 @@ async function checkBilling(apiKey) {
         // 获取当前月的第一天日期
         const day = now.getDate();  // 本月过去的天数
         startDate = new Date(now - (day - 1) * 24 * 60 * 60 * 1000); // 本月第一天
-        urlUsage = `https://api.openai.com/v1/dashboard/billing/usage?start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}`; // 查使用量
+        urlUsage = `/v1/dashboard/billing/usage?start_date=${formatDate(startDate)}&end_date=${formatDate(endDate)}`; // 查使用量
         response = await fetch(urlUsage, {headers});
         usageData = await response.json();
         totalUsage = usageData.total_usage / 100;
